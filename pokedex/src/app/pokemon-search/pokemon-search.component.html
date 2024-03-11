@@ -1,0 +1,38 @@
+<div class="pokemon-search-wrapper">
+    <button (click)="goBack()">Voltar</button>
+    <div class="pokemon-details" *ngIf="!pokemon && !loading && !searchTerm">
+    <h2>Bem vindo!  Explore o vasto mundo dos Pokémon com nossa ferramenta de busca poderosa.</h2>    
+    <h3>Que tal pega seu Pokémon?</h3>
+    
+    <p>
+        Encontre informações detalhadas sobre seus Pokémon favoritos, desde suas estatísticas até suas habilidades especiais.
+        Utilize a barra de pesquisa abaixo para começar sua jornada. Basta digitar o nome do Pokémon que você deseja encontrar e deixe-nos mostrar todos os detalhes para você!
+        Prepare-se para embarcar em uma aventura emocionante e descobrir os segredos escondidos no mundo dos Pokémon. Vamos lá, treinador!
+    </p>
+    </div>   
+
+    <input type="text" placeholder="Buscar..." name="search" [(ngModel)]="searchTerm" (ngModelChange)="search()" />
+</div>
+
+<div class="pokemon-details" *ngIf="loading; else pokemonDetails">
+    Carregando...
+</div>
+
+<ng-template #pokemonDetails>
+    <div class="pokemon-details" *ngIf="pokemon">
+        <p>Nome: {{ pokemon.name }}</p>
+        <p>Altura: {{ pokemon.height }}</p>
+        <p>Peso: {{ pokemon.weight }}</p>
+        <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+        <p>Habilidades:</p>
+        <ul>
+            <li *ngFor="let ability of pokemon.abilities">{{ ability.ability.name }}</li>
+        </ul>
+    </div>
+
+    <div class="pokemon-details" *ngIf="!pokemon && !loading && searchTerm">
+        Pokémon não encontrado.
+    </div>
+</ng-template>
+
+<button (click)="goBack()">Voltar</button>

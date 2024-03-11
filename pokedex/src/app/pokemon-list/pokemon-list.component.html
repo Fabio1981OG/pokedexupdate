@@ -1,0 +1,19 @@
+<div class="introduction">
+<h2>Clica no botão e veja qual Pokemon você capturou! <button (click)="getRandomPokemon()">Obter Pokémon Aleatório</button></h2>
+</div>
+
+<ul class="pokemon-list-wrapper">
+  <li class="pokemon-list-item" *ngFor="let pokemon of pokemons">
+    <div>
+      <p>Nome: {{ pokemon.name | capitalizeFirstLetter }}</p>
+      <p>Altura: {{ pokemon.height }}</p>
+      <p>Peso: {{ pokemon.weight }}</p>
+      <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}">
+      <p>Abilities:</p>
+      <ul>
+        <li *ngFor="let ability of pokemon.abilities">{{ ability.ability.name | capitalizeFirstLetter }}</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
